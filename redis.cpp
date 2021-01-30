@@ -110,6 +110,9 @@ Variant Redis::_read_response() {
             client->get_u8();
 
             auto str_len = string_length.to_int();
+            if(str_len == -1) { // null
+                return Variant();
+            }
 
             String str;
             for(int i = 0; i < str_len; i++) {
